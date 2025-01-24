@@ -19,7 +19,7 @@ const CreateContent = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': 'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcGkxMGU1NGFlYS05YjY1LTQ2MGYtYWE0OC1mMWRjYWQ3YTczMjkiLCJ4bW9kIjoxNzM3NjU0NzgzMDAwLCJuYmYiOjE3Mzc2NTQ3ODMsImlzcyI6IjAyNTRkMTVlODgiLCJsYWJlbCI6InJlc3QtYXBpLWRlbW8iLCJleHAiOjE4MzIyMjAwMDAsImlhdCI6MTczNzY1NDc4MywianRpIjoiNjRlZmVjNjEtYjdhZi00YzYxLTg3NGEtZTZmYzFkNzkyZTU0In0.QkdvRi1wtew4Q92Ng-GuEKOXHIy31_xi90Q-r0gJgFY'
+          'Authorization': `Bearer ${process.env.REACT_APP_DOTCMS_API_TOKEN}`
         },
         body: JSON.stringify({
           contentlet: {
