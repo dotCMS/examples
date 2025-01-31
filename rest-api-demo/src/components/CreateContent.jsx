@@ -19,7 +19,7 @@ const CreateContent = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_DOTCMS_API_TOKEN}`
+          'Authorization': `Bearer ${import.meta.env.VITE_DOTCMS_API_TOKEN}`
         },
         body: JSON.stringify({
           contentlet: {

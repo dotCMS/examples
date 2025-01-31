@@ -17,7 +17,7 @@ const CreateContentType = () => {
     try {
       const response = await fetch('https://demo.dotcms.com/api/v1/contenttype?per_page=100', {
         headers: {
-          'Authorization': `Bearer ${process.env.REACT_APP_DOTCMS_API_TOKEN}`
+          'Authorization': `Bearer ${import.meta.env.VITE_DOTCMS_API_TOKEN}`
         }
       });
       if (!response.ok) throw new Error('Failed to fetch content types');
@@ -42,7 +42,7 @@ const CreateContentType = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${process.env.REACT_APP_DOTCMS_API_TOKEN}`
+          'Authorization': `Bearer ${import.meta.env.VITE_DOTCMS_API_TOKEN}`
         },
         body: JSON.stringify({
           defaultType: false,
