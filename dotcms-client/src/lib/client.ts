@@ -1,5 +1,7 @@
 import { DotCMSConfig, PageAPIParams } from './types';
 
+const PAGE_API_PATH = '/api/v1/page/json';
+
 export class DotCMSClient {
     #token: string;
     #siteID: string;
