@@ -1,15 +1,33 @@
 {
     "name": "dotcms-client",
     "version": "1.0.0",
-    "main": "dist/index.js",
+    "main": "./dotcms-client.cjs",
+    "module": "./dotcms-client.mjs",
+    "types": "./dotcms-client.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "start": "tsc && node dist/index.js"
+        "build": "rimraf dist && rollup --config rollup.config.ts --configPlugin @rollup/plugin-typescript --bundleConfigAsCjs"
     },
     "keywords": [],
     "author": "",
     "license": "ISC",
     "description": "",
+    "exports": {
+        "./package.json": "./package.json",
+        ".": {
+            "types": "./dotcms-client.d.ts",
+            "import": "./dotcms-client.mjs",
+            "require": "./dotcms-client.cjs",
+            "default": "./dotcms-client.mjs"
+        }
+    },
+    "typesVersions": {
+        "*": {
+            ".": [
+                "./dotcms-client.d.ts"
+            ]
+        }
+    },
     "devDependencies": {
         "@rollup/plugin-terser": "^0.4.4",
         "@rollup/plugin-typescript": "^12.1.2",
