@@ -1,0 +1,24 @@
+# dotCMS Development Environment Configuration
+# This file contains environment-specific values for dotCMS deployment
+
+# Global configuration
+global:
+  environment: dev
+  domain: dev.dotcms.local
+  namespace: dotcms-dev
+
+# dotCMS specific configuration
+image:
+  repository: dotcms/dotcms
+  tag: "25.09.04-01" # use explicit tags from dotCMS Docker releases
+
+replicaCount: 2
+
+resources:
+  requests:
+    cpu: "500m"
+    memory: "2Gi"
+  limits:
+    cpu: "1"
+    memory: "4Gi"
+  
