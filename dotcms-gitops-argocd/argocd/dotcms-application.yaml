@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: dotcms-dev
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   project: default
   source:
@@ -12,6 +14,19 @@ spec:
     helm:
       valueFiles:
         - https://raw.githubusercontent.com/dotCMS/examples/dotcms-gitops-argocd/dotcms-gitops-argocd/environments/dev/values.yaml
+      parameters:
+        - name: repository
+          value: dotcms/dotcms
+        - name: tag
+          value: "25.08.15-1"
+        - name: replicas
+          value: "1"
+        - name: database.local.enabled
+          value: "true"
+        - name: opensearch.local.enabled
+          value: "true"
+        - name: redis.local.enabled
+          value: "true"
   destination:
     server: https://kubernetes.default.svc
     namespace: dotcms-dev
@@ -21,3 +36,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
