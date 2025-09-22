@@ -3,7 +3,7 @@
 
 # Use the latest stable image for development
 repository: dotcms/dotcms
-tag: "25.08.15-1"
+tag: "25.09.18-1"
 
 # Single replica for development
 replicas: 1
@@ -47,4 +47,4 @@ prometheus:
 
 # Force pod restart with annotation
 podAnnotations:
-  restart: "2025-09-22-17-45"
+  restart: "2025-09-22-17-50"
