@@ -5,13 +5,18 @@ metadata:
   namespace: argocd
 spec:
   project: default
-  source:
-    repoURL: https://dotcms.github.io/helm-charts/
-    chart: dotcms
-    targetRevision: 1.0.34
-    helm:
-      valueFiles:
-        - https://raw.githubusercontent.com/dotCMS/examples/dotcms-gitops-argocd/dotcms-gitops-argocd/environments/dev/values.yaml
+  sources:
+    # Source 1: dotCMS Helm chart
+    - repoURL: https://dotcms.github.io/helm-charts/
+      chart: dotcms
+      targetRevision: 1.0.34
+    # Source 2: Git repo with values
+    - repoURL: https://github.com/dotCMS/examples.git
+      targetRevision: dotcms-gitops-argocd
+      ref: values
+      helm:
+        valueFiles:
+          - dotcms-gitops-argocd/environments/dev/values.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: dotcms-dev
