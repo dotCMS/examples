@@ -50,37 +50,24 @@ Combining dotCMS with ArgoCD provides several key benefits:
 
 ```
 dotcms-gitops-argocd/
+├── argocd/
+│   ├── dotcms-application.yaml  # ArgoCD Application for development
+│   └── README.md
 └── environments/
-    ├── dev/
-    │   └── values.yaml          # Development environment configuration
-    ├── staging/
-    │   └── values.yaml          # Staging environment configuration
-    └── prod/
-        └── values.yaml          # Production environment configuration
+    └── dev/
+        └── values.yaml          # Development environment configuration
 ```
 
-## Environment Configurations
+## Environment Configuration
 
-Each environment contains a `values.yaml` file with environment-specific configurations:
+The development environment contains a `values.yaml` file with development-specific configurations:
 
 ### Development (`dev/values.yaml`)
 - Minimal resource allocation for cost efficiency
 - Debug mode enabled for troubleshooting
 - Basic security configurations
 - Single replica for simplicity
-
-### Staging (`staging/values.yaml`)
-- Intermediate resource allocation
-- SSL/TLS enabled for security testing
-- Enhanced monitoring and logging
-- Two replicas for basic high availability
-
-### Production (`prod/values.yaml`)
-- Full resource allocation for performance
-- Complete security hardening
-- High availability with multiple replicas
-- Comprehensive monitoring, alerting, and backup configurations
-- Horizontal Pod Autoscaler for dynamic scaling
+- Local domain configuration (`dev.dotcms.local`)
 
 ## Prerequisites
 
@@ -95,22 +82,22 @@ Before using this configuration, ensure you have:
 ## Getting Started
 
 1. **Fork or clone this repository** to your Git hosting service
-2. **Customize the values.yaml files** for your specific environment needs
+2. **Customize the values.yaml file** for your specific development needs
 3. **Set up ArgoCD** in your Kubernetes cluster
-4. **Create ArgoCD Applications** pointing to your Git repository
-5. **Configure environment-specific secrets** (database passwords, license keys, etc.)
+4. **Deploy the ArgoCD Application** using the provided manifest
+5. **Configure development secrets** (database passwords, license keys, etc.)
 
-## Key Features by Environment
+## Development Environment Features
 
-| Feature | Development | Staging | Production |
-|---------|-------------|---------|------------|
-| Replicas | 1 | 2 | 3+ |
-| Resources | Minimal | Medium | High |
-| Debug Mode | ✅ | ❌ | ❌ |
-| SSL/TLS | ❌ | ✅ | ✅ |
-| Monitoring | Basic | Enhanced | Complete |
-| Auto-scaling | ❌ | ❌ | ✅ |
-| Backup | ❌ | ❌ | ✅ |
+| Feature | Development |
+|---------|-------------|
+| Replicas | 1 |
+| Resources | Minimal |
+| Debug Mode | ✅ |
+| SSL/TLS | ❌ |
+| Monitoring | Basic |
+| Auto-scaling | ❌ |
+| Domain | dev.dotcms.local |
 
 ## Next Steps
 

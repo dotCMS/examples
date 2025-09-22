@@ -10,7 +10,7 @@ global:
 # dotCMS specific configuration
 image:
   repository: dotcms/dotcms
-  tag: "25.09.04-01" # use explicit tags from dotCMS Docker releases
+  tag: "25.09.18-01" # use explicit tags from dotCMS Docker releases
 
 replicaCount: 2
 
