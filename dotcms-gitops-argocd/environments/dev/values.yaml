@@ -1,24 +1,46 @@
 # dotCMS Development Environment Configuration
 # This file contains environment-specific values for dotCMS deployment
 
-# Global configuration
-global:
-  environment: dev
-  domain: dev.dotcms.local
-  namespace: dotcms-dev
+# Use the latest stable image for development
+repository: dotcms/dotcms
+tag: "latest"
 
-# dotCMS specific configuration
-image:
-  repository: dotcms/dotcms
-  tag: "25.09.18-01" # use explicit tags from dotCMS Docker releases
+# Single replica for development
+replicas: 1
 
-replicaCount: 2
-
+# Reduced resources for development
 resources:
   requests:
     cpu: "500m"
     memory: "2Gi"
   limits:
     cpu: "1"
-    memory: "4Gi"
-  
+    memory: "3Gi"
+
+# Enable local services (database, opensearch, redis)
+database:
+  local:
+    enabled: true
+
+opensearch:
+  local:
+    enabled: true
+
+redis:
+  local:
+    enabled: true
+
+# Ingress configuration for local development
+ingress:
+  host: "dev.dotcms.local"
+  hostSuffix: "dotcms.local"
+  type: "nginx"
+
+# Enable management port for health checks
+management:
+  enabled: true
+  port: 8090
+
+# Enable Prometheus metrics
+prometheus:
+  enabled: true
