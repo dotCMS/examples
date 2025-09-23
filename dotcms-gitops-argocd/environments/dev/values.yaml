@@ -3,7 +3,7 @@
 
 # Use the latest stable image for development
 repository: dotcms/dotcms
-tag: "25.09.18-1"
+tag: "25.08.25-01"
 
 # Single replica for development
 replicas: 1
