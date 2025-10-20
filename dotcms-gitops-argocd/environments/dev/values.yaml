@@ -1,0 +1,54 @@
+# dotCMS Development Environment Configuration
+# This file contains environment-specific values for dotCMS deployment
+#
+# Note: Database secrets are preserved using ArgoCD's ignoreDifferences
+# to prevent password regeneration when the database persists in PVCs.
+# See argocd/dotcms-application.yaml for the ignoreDifferences configuration.
+
+# Use the latest stable image for development
+repository: dotcms/dotcms
+tag: "25.10.20-1"
+
+# Single replica for development
+replicas: 1
+
+# Reduced resources for development
+resources:
+  requests:
+    cpu: "500m"
+    memory: "2Gi"
+  limits:
+    cpu: "1"
+    memory: "3Gi"
+
+# Enable local services (database, opensearch, redis)
+database:
+  local:
+    enabled: true
+
+opensearch:
+  local:
+    enabled: true
+
+redis:
+  local:
+    enabled: true
+
+# Ingress configuration for local development
+ingress:
+  host: "dev.dotcms.local"
+  hostSuffix: "dotcms.local"
+  type: "nginx"
+
+# Enable management port for health checks
+management:
+  enabled: true
+  port: 8090
+
+# Enable Prometheus metrics
+prometheus:
+  enabled: true
+
+# Force pod restart with annotation
+podAnnotations:
+  restart: "2025-09-22-17-50"
