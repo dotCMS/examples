@@ -1,0 +1,43 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: dotcms-dev
+  namespace: argocd
+spec:
+  project: default
+  sources:
+    - repoURL: https://dotcms.github.io/helm-charts/
+      chart: dotcms
+      targetRevision: 1.0.34
+      helm:
+        valueFiles:
+          - $values/dotcms-gitops-argocd/environments/dev/values.yaml
+    - repoURL: https://github.com/dotCMS/examples.git
+      targetRevision: dotcms-gitops-argocd
+      ref: values
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: dotcms-dev
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+  # Ignore database secrets to prevent password regeneration on re-sync
+  # This is critical for stateful databases that persist credentials in PVCs
+  # Without this, ArgoCD regenerates random passwords that don't match the DB
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: corp-dotcms-dev-localsecret-prod-database
+      jsonPointers:
+        - /data/password
+        - /data/username
+    - group: ""
+      kind: Secret
+      name: corp-dotcms-dev-localsecret-db-local-admin
+      jsonPointers:
+        - /data/password
+        - /data/username
