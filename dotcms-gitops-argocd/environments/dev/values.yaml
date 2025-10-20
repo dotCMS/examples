@@ -1,10 +1,8 @@
 # dotCMS Development Environment Configuration
 # This file contains environment-specific values for dotCMS deployment
 #
-# IMPORTANT: Database credentials are managed by Kubernetes Secrets
-# The ArgoCD application is configured to ignore password changes in secrets
-# to prevent authentication errors on re-deployments. This is critical for
-# local development where the database persists in PVCs across deployments.
+# Note: Database secrets are preserved across deployments (prune: false)
+# to maintain compatibility with the persistent PostgreSQL instance
 
 # Use the latest stable image for development
 repository: dotcms/dotcms

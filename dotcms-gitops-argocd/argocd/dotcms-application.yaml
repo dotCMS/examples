@@ -20,21 +20,9 @@ spec:
     namespace: dotcms-dev
   syncPolicy:
     automated:
-      prune: true
+      # Disable pruning to preserve database secrets across deployments
+      # This prevents password regeneration issues with local PostgreSQL
+      prune: false
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - RespectIgnoreDifferences=true
-    # Ignore secrets to prevent password regeneration on re-sync
-    # This prevents database authentication errors on subsequent deployments
-    ignoreDifferences:
-      - group: ""
-        kind: Secret
-        name: corp-dotcms-dev-localsecret-prod-database
-        jsonPointers:
-          - /data/password
-      - group: ""
-        kind: Secret
-        name: corp-dotcms-dev-localsecret-db-local-admin
-        jsonPointers:
-          - /data/password
