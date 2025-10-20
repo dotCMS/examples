@@ -6,7 +6,7 @@ repository: dotcms/dotcms
 tag: "25.09.18-1"
 
 # Single replica for development
-replicas: 1
+replicas: 2
 
 # Reduced resources for development
 resources:
