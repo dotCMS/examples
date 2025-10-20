@@ -20,9 +20,24 @@ spec:
     namespace: dotcms-dev
   syncPolicy:
     automated:
-      # Disable pruning to preserve database secrets across deployments
-      # This prevents password regeneration issues with local PostgreSQL
-      prune: false
+      prune: true
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+  # Ignore database secrets to prevent password regeneration on re-sync
+  # This is critical for stateful databases that persist credentials in PVCs
+  # Without this, ArgoCD regenerates random passwords that don't match the DB
+  ignoreDifferences:
+    - group: ""
+      kind: Secret
+      name: corp-dotcms-dev-localsecret-prod-database
+      jsonPointers:
+        - /data/password
+        - /data/username
+    - group: ""
+      kind: Secret
+      name: corp-dotcms-dev-localsecret-db-local-admin
+      jsonPointers:
+        - /data/password
+        - /data/username

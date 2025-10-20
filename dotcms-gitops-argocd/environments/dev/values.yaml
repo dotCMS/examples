@@ -1,12 +1,13 @@
 # dotCMS Development Environment Configuration
 # This file contains environment-specific values for dotCMS deployment
 #
-# Note: Database secrets are preserved across deployments (prune: false)
-# to maintain compatibility with the persistent PostgreSQL instance
+# Note: Database secrets are preserved using ArgoCD's ignoreDifferences
+# to prevent password regeneration when the database persists in PVCs.
+# See argocd/dotcms-application.yaml for the ignoreDifferences configuration.
 
 # Use the latest stable image for development
 repository: dotcms/dotcms
-tag: "25.09.18-1"
+tag: "25.10.16-01"
 
 # Single replica for development
 replicas: 1
