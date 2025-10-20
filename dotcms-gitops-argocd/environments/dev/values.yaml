@@ -6,10 +6,10 @@
 
 # Use the latest stable image for development
 repository: dotcms/dotcms
-tag: "25.09.18-1"
+tag: "25.10.16-01"
 
 # Single replica for development
-replicas: 2
+replicas: 1
 
 # Reduced resources for development
 resources:
